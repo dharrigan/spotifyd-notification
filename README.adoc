@@ -1,0 +1,72 @@
+= spotifyd notification
+:author: David Harrigan
+:email: <dharrigan [@] gmail [dot] com>
+:docinfo: true
+:doctype: book
+:icons: font
+:numbered:
+:sectlinks:
+:sectnums:
+:setanchors:
+:source-highlighter: highlightjs
+:toc:
+:toclevels: 5
+
+== Information
+
+This is a very simple example of using
+https://github.com/borkdude/babashka[babashka] to rewrite into
+https://www.clojure.org[Clojure] an
+existing BASH script that can be found
+https://github.com/Spotifyd/spotifyd/wiki/User-supplied-scripts[here].
+
+I hope you agree that the Clojure example is nicer :-)
+
+== Prerequisites
+
+* https://github.com/borkdude/babashka[babashka]
+* https://github.com/Spotifyd/spotifyd[spotifyd]
+* https://dunst-project.org/[dunst]
+* https://developer.gnome.org/libnotify/[notify-send] (comes with libnotify)
+
+== Usage
+
+Create (or modify) `$HOME/.config/spotifyd/spotifyd.conf` adding within the
+`Global` section:
+
+----
+[global]
+onevent = spotify-notification.clj <client-id> <client-secret> <1>
+----
+<1> The `client-id` and `client-secret` can be obtained from the
+https://developer.spotify.com/dashboard/applications[spotify developer]
+dashboard.
+
+IMPORTANT: Ensure that `spotifyd-notification.clj` is in your path and is
+*executable*.
+
+== Example
+----
+[global]
+onevent = spotify-notification.clj 12a1d445b4b4a1a4a216508faebb 11b4e44446dda9aea216518fdeba
+----
+
+== License
+
+Find the full https://unlicense.org/[unlicense] in the `UNLICENSE` (and
+`LICENSE`) file, but here's a snippet:
+
+```
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+```
+
+== Feedback
+
+I welcome feedback. I can usually be found hanging out in the `#clojure-uk`
+channel on https://clojurians.slack.com[Clojurians] Slack. You can also email
+me if you wish :-)
