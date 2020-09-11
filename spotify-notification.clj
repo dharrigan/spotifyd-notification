@@ -21,8 +21,8 @@
       :access_token))
 
 (defn get-track-info
-  [access-token track-id]
-  (-> (curl/get (str "https://api.spotify.com/v1/tracks/" track-id)
+  [access-token]
+  (-> (curl/get (str "https://api.spotify.com/v1/tracks/" (System/getenv "TRACK_ID"))
                 {:headers {"Accept" "application/json"
                            "Content-Type" "application/json"
                            "Authorization" (str "Bearer " access-token)}
@@ -41,7 +41,7 @@
 (defn display-notification
   [client-id secret-id]
   (some-> (get-access-token client-id secret-id)
-          (get-track-info (System/getenv "TRACK_ID"))
+          (get-track-info)
           (notify-send)))
 
 (let [[client-id secret-id] *command-line-args*]
